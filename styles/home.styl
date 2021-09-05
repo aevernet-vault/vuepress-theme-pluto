@@ -1,0 +1,19 @@
+.home
+  color var(--text-color)
+  .features
+    align-items stretch
+    .feature
+      margin-bottom 20px
+      padding 5px 10px
+      border-radius 10px
+      cursor pointer
+      background linear-gradient(135deg, rgba(125, 177, 253, .5), rgba(178, 120, 251, .5))
+      box-shadow var(--box-shadow)
+      transition all .3s
+      &:hover
+        background linear-gradient(135deg, rgba(125, 177, 253, 1), rgba(178, 120, 251, 1))
+        box-shadow var(--box-shadow-hover)
+      h2, p
+        color var(--text-color)
+  .footer
+    color $accentColor
