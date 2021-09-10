@@ -1,10 +1,10 @@
 <template>
   <div>
     <ParentLayout>
-      <!-- <template #page-top>
-        <PageFooter v-if="$route.path === '/'" />
-        <PageFooter />
-      </template> -->
+      <!-- 添加 Valine 插件 -->
+      <template #page-bottom>
+        <ValineComment v-show="!hideComment" />
+      </template>
     </ParentLayout>
     <ModePicker
       :mode = mode
@@ -14,15 +14,15 @@
 
 <script>
 import ParentLayout from '@parent-theme/layouts/Layout.vue'
-// import PageFooter from '@theme/components/PageFooter.vue'
 import ModePicker from '@theme/components/ModePicker.vue'
+import ValineComment from '@theme/components/ValineComment.vue'
 import applyMode from '@theme/utils/darkMode'
 
 export default {
   components: {
     ParentLayout,
-    // PageFooter,
-    ModePicker
+    ModePicker,
+    ValineComment
   },
   data() {
     return {
@@ -35,6 +35,12 @@ export default {
       this.mode = this.$themeConfig.modeOptions.mode
     }
     applyMode(this.mode, this.$themeConfig.modeOptions)
+  },
+  computed: {
+    // 扩展 hideComment
+    hideComment () {
+      return this.$themeConfig.hideComment || this.$page.frontmatter.hideComment
+    },
   },
   methods: {
     onChangeMode(mode) {

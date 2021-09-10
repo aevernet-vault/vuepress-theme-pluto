@@ -1,7 +1,8 @@
 module.exports = (themeConfig, ctx) => {
   return {
     extend: '@vuepress/theme-default',
-    
+    // TODO：配置 head 以及其他设置
+
     // 预安装插件
     plugins: [
       // A progress in top while skipping to other page
@@ -23,11 +24,13 @@ module.exports = (themeConfig, ctx) => {
       ['@xiaopanda/vuepress-plugin-code-copy'],
       // 字数统计：https://github.com/darrenjennings/vuepress-plugin-reading-time
       // ['vuepress-plugin-reading-time'],
-      // Zoom the pic, see https://vuepress.github.io/zh/plugins/zooming/
+      /**
+       * Zoom the pic, see https://vuepress.github.io/zh/plugins/zooming/
+       * More options see https://desmonding.me/zooming/docs/#/configuration?id=options
+       */
       ['vuepress-plugin-zooming', {
         selector: '.content__default img',
         delay: 100,
-        // More options see https://desmonding.me/zooming/docs/#/configuration?id=options
         options: {
           bgColor: 'rgba(0, 0, 0, .6)',
           zIndex: 999,
@@ -35,7 +38,5 @@ module.exports = (themeConfig, ctx) => {
         }
       }]
     ],
-
-    // 配置 head 以及其他设置
   }
 }
