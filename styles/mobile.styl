@@ -1,27 +1,55 @@
 // @require './config'
 
-$mobileSidebarWidth = $sidebarWidth * 0.82
+$mobileSidebarWidth = $sidebarWidth * 0.8
+$miniSidebarWidth = $sidebarWidth * 0.8
+$miniTocWidth = $tocWidth * 0.8
 
-.dropdown-wrapper .dropdown-title, .dropdown-wrapper .mobile-dropdown-title
-  color var(--text-color)
+/* .dropdown-wrapper .dropdown-title, .dropdown-wrapper .mobile-dropdown-title
+  color var(--text-color) */
 
-// narrow desktop / iPad
+// fullpage desktop
+@media (min-width: ($MQMobile + 1px))
+  .theme-container.no-sidebar
+    .sidebar
+      display block
+    .page
+      margin-left 0
+
+// narrow desktop / iPad：小尺寸 desktop、ipad 横屏，收窄宽度和边距
 @media (max-width: $MQNarrow)
-  .sidebar
-    font-size 15px
-    width $mobileSidebarWidth
-  .page, .password-wrapper-in
-    margin-left $mobileSidebarWidth
+  .theme-main
+    .sidebar
+      width $miniSidebarWidth
+      font-size .9rem
+    .toc
+      width $miniTocWidth
+      font-size .9rem
+    .page
+      padding-left 0
+      .content__default
+        padding 2rem 1.5rem
 
-// wide mobile
+// wide mobile：超宽手机横屏、ipad 竖屏，
 @media (max-width: $MQMobile)
-  .sidebar
-    top 0
-    padding-top $navbarHeight
-    transform translateX(-100%)
-    transition transform .2s ease
-  .page, .password-wrapper-in
+  $offsetTop = $navbarHeight + $navbarSubHeight + $navbarActiveHeight
+  .theme-main
+    margin-top $offsetTop
+    .sidebar
+      position fixed
+      top $offsetTop
+      height 'calc(100vh - %s)' % $offsetTop
+      padding-top 0
+      transform translateX(-100%)
+      transition transform .2s ease
+    .toc
+      top $offsetTop
+      // right 0
+      height 'calc(100vh - %s)' % $offsetTop
+      padding-top 0
+  .page
     margin-left 0
+    padding-right 0
+    width 'calc(100vw - %s)' % $mobileSidebarWidth
   .theme-container
     &.sidebar-open
       .sidebar
@@ -29,10 +57,11 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
     &.no-navbar
       .sidebar
         padding-top: 0
-  .password-shadow
-    padding-left 0
+  .navbar
+    .can-hide
+      display none
 
-// narrow mobile
+// narrow mobile：小屏幕，隐藏 sidebar, toc
 @media (max-width: $MQMobileNarrow)
   h1
     font-size 1.9rem
@@ -40,3 +69,12 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
     div[class*="language-"]
       margin 0.85rem -1.5rem
       border-radius 0
+  .toc
+    position fixed
+    top 0
+    height 100vh
+    padding-top $offsetTop
+    transform translateX(100vw)
+    transition transform .2s ease
+    &.toc-open
+      transform translateX('calc(100vw - %s)' % $mobileSidebarWidth)

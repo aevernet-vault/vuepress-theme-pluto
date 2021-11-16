@@ -1,3 +1,4 @@
+@require './palette.styl'
 @require './code'
 @require './custom-blocks'
 @require './arrow'
@@ -6,24 +7,65 @@
 @require './home'
 @require './element-tabs.styl'
 @require './animate.min.css'
+@require './icon.styl'
 
 html, body
   padding 0
   margin 0
+  font-size 15px
   background-color var(--background-color)
   transition color .2s, background-color .2s
 body
   font-family Ubuntu, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
-  font-size 15px
   color var(--text-color)
   background-color var(--background-color)
 
-.page, .password-wrapper-in
-  overflow-x: hidden
-  margin-top: $navbarHeight
-  // margin-left $sidebarWidth
+/* 布局 */
+.theme-main
+  display flex
+  max-width $pageWidth
+  margin 0 auto
+  margin-top $navbarHeight
+.page
+  flex 1
+  overflow-x hidden
+  max-width $contentWidth
+  margin 0 auto
+  padding 0
+
+.sidebar, .toc
+  z-index 10
+  position sticky // => fixed
+  overflow-y auto
+  box-sizing border-box
+  top $navbarHeight
+  height 'calc(100vh - %s)' % $navbarHeight
+  margin 0
+  padding 1rem 0
+  background-color var(--background-color-block)
+.sidebar
+  width $sidebarWidth
+  border-right 1px solid var(--border-color)
+.toc
+  width $tocWidth
+  border-left 1px solid var(--border-color)
+
+.navbar-sub, .navbar-active
+  width 100vw
+  color var(--text-color)
+  background-color var(--background-color-block)
+.navbar-sub
+  z-index 99
+  position fixed
+  top $navbarHeight
+  height $navbarSubHeight
+.navbar-active
+  z-index 19
+  position fixed
+  top $navbarHeight + $navbarSubHeight
+  height $navbarActiveHeight
 
 .navbar
   position fixed
@@ -33,9 +75,7 @@ body
   right 0
   height $navbarHeight
   color var(--text-color)
-  box-sizing border-box
   border none
-  box-shadow var(--box-shadow)
   background-color var(--background-color-block)
   .site-name
     color var(--text-color)
@@ -45,7 +85,6 @@ body
     a
       &:hover
         color $accentColor
-
 .dropdown-wrapper
   .dropdown-title
     color var(--text-color)
@@ -58,6 +97,7 @@ body
     h4
       color var(--text-color-sub)
 
+/* mask */
 .sidebar-mask
   position fixed
   z-index 9
@@ -67,20 +107,22 @@ body
   height 100vh
   display none
   background-color: rgba(0,0,0,.65);
-
-.sidebar
-  font-size 16px
-  background-color var(--background-color-block)
-  width $sidebarWidth
+.toc-mask
   position fixed
-  z-index 10
-  margin 0
-  top $navbarHeight
+  z-index 9
+  top 0
   left 0
-  bottom 0
-  box-sizing border-box
-  border-right 1px solid var(--border-color)
-  overflow-y auto
+  width 100vw
+  height 100vh
+  background-color rgba(0, 0, 0, .65)
+.setting-mask
+  position fixed
+  z-index 100
+  top 0
+  left 0
+  width 100vw
+  height 100vh
+  background-color rgba(0, 0, 0, .65)
 
 .content__default:not(.custom)
   @extend $wrapper
@@ -147,11 +189,11 @@ h1, h2, h3, h4, h5, h6
   font-weight 500
   line-height 1.25
   .content__default:not(.custom) > &
-    margin-top (2.1rem - $navbarHeight)
+    /* margin-top (2.1rem - $navbarHeight)
     padding-top $navbarHeight
-    margin-bottom 1rem
+    margin-bottom 1rem */
     &:first-child
-      margin-top -3.5rem
+      margin-top -4.5rem
 
 h1
   font-size 1.6rem
@@ -192,7 +234,8 @@ table
   thead
     background-color $accentColor
 
-tr
+tbody tr
+  background-color var(--background-color)
   border-top 1px solid var(--border-color)
   &:first-child
     border-top none
@@ -215,13 +258,8 @@ th, td
     .sidebar
       top 0
 
-@media (min-width: ($MQMobile + 1px))
-  .theme-container.no-sidebar
-    .sidebar
-      display none
-    .page, .password-wrapper-in
-      margin-left 0
 
+/* 媒体查询 */
 @require 'mobile.styl'
 
 .iconfont
@@ -250,7 +288,6 @@ th, td
   overflow: auto
 
 /************** SW-Update Popup **************/
-
 .sw-update-popup
   border-radius: $borderRadius!important;
   box-shadow: var(--box-shadow)!important;

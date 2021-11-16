@@ -1,12 +1,12 @@
 {
   "name": "vuepress-theme-pluto",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@leecervan/markdown-it-katex": "1.0.0",
     "@vuepress/plugin-back-to-top": "^1.8.2",
     "@xiaopanda/vuepress-plugin-code-copy": "^1.0.3",
-    "@leecervan/markdown-it-katex": "1.0.0",
     "animate.css": "^4.1.1",
     "async-validator": "^4.0.3",
     "valine": "^1.4.14",
@@ -17,5 +17,6 @@
     "vuepress-plugin-reading-progress": "^1.0.10",
     "vuepress-plugin-smooth-scroll": "^0.0.10",
     "vuepress-plugin-zooming": "^1.1.8"
-  }
+  },
+  "devDependencies": {}
 }

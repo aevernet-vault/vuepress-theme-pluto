@@ -18,6 +18,10 @@ hideComment: true
 ```
 
 
+## 添加插槽
+
++ TODO：适当添加一些插槽，允许主题的进一步定制
+
 
 ## 修改样式
 
@@ -104,7 +108,40 @@ themeConfig: {
 
 
 
+### 响应式
+
+为了保证更好的阅读体验，调整了一些响应式变化的位置，以及定制了主题：
++ 将 Sidebar 和 Toc 分离，在大屏下的阅读体验更佳
++ 适当处理窄屏幕下的页面显示，保证内容块以及 Toc 能显示更多内容
++ 在小屏幕下的阅读体验也有提升
+
+以下是本主题设计的响应式变化位置
+|屏幕|宽度|内容块宽度|备注|
+|-|-|-|-|
+|大屏 desktop|1360 ~ ...|880 ~ 1120|显示 Sidebar, Toc|
+|中屏 desktop，大屏 ipad 横屏|1200 ~ 1359|760 ~ 920|显示 Sidebar, Toc，但收窄宽度、缩小字体|
+|小屏 desktop，小屏 ipad 横屏|1000 ~ 1199|760 ~ 960|显示 Toc，隐藏 Sidebar；同时添加辅助导航栏|
+|ipad 竖屏，手机|0 ~ 999|0 ~ 999|隐藏 Sidebar, Toc；同时添加辅助导航栏|
+
+
+你可以定制一些 Stylus 变量来修改响应式变化点以及各尺寸来调整内容的显示：
+```stylus
+$MQNarrow = 1359px            // 小屏幕客户端 / ipad 横屏
+$MQMobile = 1199px            // 超宽屏幕手机 / ipad 竖屏
+$MQMobileNarrow = 999px       // 小屏幕手机
+
+$homePageWidth = 1126px       // 首页宽度
+$sidebarWidth = 16rem         // 边栏宽度
+$tocWidth = 16rem             // 目录宽度
+$contentWidth = 1060px        // 最大内容宽度
+$pageWidth ?= 1600px          // 最大页面宽度
+
+$navbarHeight = 54px          // 导航栏高度
+$navbarSubHeight = 50px       // 辅助导航栏高度
+$navbarActiveHeight = 40px    // 辅助工具栏高度
+```
+
+
 ## Todo
 
-+ 定制侧边栏(`sidebar`)
 + 定制首页(`/`)

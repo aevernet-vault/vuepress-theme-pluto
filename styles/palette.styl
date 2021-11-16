@@ -47,8 +47,27 @@ $maskColor ?= #888
 $maskColorDark ?= #000
 
 /* code style */
+$codeBgColor = #272822
 $codeBlockHeight = 600px
 
-// $homePageWidth = 1126px
-// $contentWidth = 860px
-// $sidebarWidth = 18rem
+
+// 响应式变化点：保证在 desktop、ipad 横屏有较好的阅读体验
+/*
+$MQNarrow < width < $pageWidth：全尺寸
+$MQMobile < width < $MQNarrow：全尺寸；收窄边距，缩小 sidebar / toc 宽度、字体
+$MQMobileNarrow < width < $MQMobile：显示 toc，隐藏 sidebar
+width < $MQMobileNarrow：隐藏 sidebar, toc
+*/
+$MQNarrow = 1359px            // 小屏幕客户端 / ipad 横屏
+$MQMobile = 1199px            // 超宽屏幕手机 / ipad 竖屏
+$MQMobileNarrow = 999px       // 小屏幕手机
+
+// $homePageWidth = 1126px    // 首页宽度
+$sidebarWidth = 16rem         // 边栏宽度
+$tocWidth = 16rem             // 目录宽度
+$contentWidth = 1060px        // 最大内容宽度
+$pageWidth ?= 1600px          // 最大页面宽度
+
+$navbarHeight = 54px
+$navbarSubHeight = 50px
+$navbarActiveHeight = 40px
