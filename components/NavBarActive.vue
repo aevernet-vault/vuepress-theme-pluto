@@ -113,7 +113,7 @@ export default {
       const stack = []
       /* '/programming-language/r/syntax.html' will resolve:
        * prefix => /programming-language/r/
-       * postfix => syuntax
+       * postfix => syntax
        */
       const prefix = /\/.+\//.test(path)
         ? path.match(/\/.+\//)[0]

@@ -3,7 +3,9 @@
     <div class="navbar-sub__nav">
       <ul class="navbar-sub__nav-list">
         <li class="navbar-sub__nav-item"
-          :class="{ 'active': activeNav === index }"
+          :class="[
+            { 'active': activeNav === index },
+          ]"
           v-for="(nav, index) in navLinks"
           :key="nav.text"
           @click="onClickNav(index)"
@@ -63,7 +65,7 @@ export default {
     },
     items() {
       return this.showNavList ? this.navLinks[this.activeNav].items : []
-    }
+    },
   },
 
   methods: {
